@@ -39,7 +39,7 @@ To start coding, just simple create index.html and write your code in any editor
 
 ### Command Line Options
 
-``powerchrome.exe /app={startup.html} /fullscreen /script={interface.js} /output={name.html} /output={name.pdf} /css={selector}``    
+``powerchrome.exe /app={startup.html} /fullscreen /script={interface.js} /output={name.html} /output={name.pdf} /select={selector}``    
 
 * specify application startup page by ``/app={startup.html}`` or ``/url={startup.html}``
 * open application in fullscreen ``/fullscreen`` or ``/kiosk``
@@ -56,11 +56,11 @@ with significant improvement.
 | Comparison       | PowerChrom        | PowerPage
 |------------------|-----------------|----------
 | Web Engine       | Chromimum         | IE 9-11
-| Installation     | protable          | portable
-| Package Size     | 150M              | 10M
+| Installation     | portable          | portable
+| Package Size     | 150M              | 14M
 | API (javascript) | sync mode         | async mode
 | Developed By     | powerbuilder 2019R3 | powerbuilder 10.5
-| Capability       | all purpose |  simple applicaton
+| Capability       | all purposes |  simple applicaton
 
 
 ### Security Consideration
@@ -78,8 +78,10 @@ security according your application nature.
 ### To Do List
 
 * pb.httpSource(url, selector) // no Ajax needed, handy for crawl page
+* pb.datawindow(elementID, parm, action) action:=preview|print|form|report
+* release preview version v0.30 
 * pb.encode(text, manner), pb.decode(text,manner)
-* Commandline: export to html/pdf. ``/url=link /output=name.html /output=name.pdf /selector=``
+* Commandline: export to html/pdf. ``/url=link /output=name.html /output=name.pdf /select=selector``
 * release v0.60 
 * documentation - API 
 * documentation - development guide
