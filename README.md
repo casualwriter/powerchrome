@@ -12,11 +12,10 @@ Example of PowerChome-Javascript-Interface:
 * Eexecute file ``pb.shell('calc.exe')``
 * Copy File  ``pb.fileCopy( sourceFile, targetFile )``
 * Connect to oracle database ``pb.dbConnect( 'O90', dbParm, dbServer, logID, logPass )``
-* Run SQL query (in sync mode) ``rsStr = pb.dbQuery( 'select * from tablename' )``
+* Run SQL query (sync mode) ``rsStr = pb.dbQuery( 'select * from tablename' )``
 * Run SQL query, and convert to json. ``rs = JSON.parse( pb.dbQuery( sql ) )``
 * Get HTML source (sync mode) ``src = pb.httpSource(url)`` 
 * Popup about dialog ``pb.window('w_about')``
-* Run Powerbuilder Datawindow for reporting ``pb.datawindow( dwElementId, params )``
 
 #### Features
 
@@ -29,23 +28,23 @@ Example of PowerChome-Javascript-Interface:
 
 ### Get Started
 
-Just download and unzip the package. run powerchrome.exe.
+Just download and unzip the all-in-one package. run powerchrome.exe.
 
 The program will load powerchrome.html as startup page. The page demonstates how Powerchrome work with html as an desktop application.
 
 ![](powerchrome.jpg)
 
-To start coding, just simple create index.html and write your code in any editor
+To start coding, just simple create index.html and write your code in any text editor
 
 ### Command Line Options
 
-``powerchrome.exe /app={startup.html} /fullscreen /script={interface.js} /output={name.html} /output={name.pdf} /select={selector}``    
+``powerchrome.exe /app={startup.html} /fullscreen /script={interface.js} /save={name.html} /save={name.pdf} /select={selector}``    
 
 * specify application startup page by ``/app={startup.html}`` or ``/url={startup.html}``
 * open application in fullscreen ``/fullscreen`` or ``/kiosk``
 * use customized interface script by ``/script={interface.js}``
-* save link to html file with css-selector ``/ulr={link} /output={name.html} /css=selector``
-* save link to pdf file  with css-selector ``/ulr={link} /output={name.pdf} /css=selector``
+* crawl page by css-selector, and save to html file ``/ulr={link} /save={name.html} /css=selector``
+* print page to pdf file ``/ulr={link} /save={name.pdf}``
 
 
 ### Compare with Powerpage
@@ -77,12 +76,9 @@ security according your application nature.
 
 ### To Do List
 
-* pb.httpSource(url, selector) // no Ajax needed, handy for crawl page
-* pb.datawindow(elementID, parm, action) action:=preview|print|form|report
-* release preview version v0.30 
 * pb.encode(text, manner), pb.decode(text,manner)
-* Commandline: export to html/pdf. ``/url=link /output=name.html /output=name.pdf /select=selector``
-* release v0.60 
+* pb.datawindow(elementID, parm, action) action:=preview|print|form|report
+* release version v0.60 
 * documentation - API 
 * documentation - development guide
 * local application - markdown editor, web crawler
