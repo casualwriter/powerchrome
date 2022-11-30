@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<title>Sample HTML Dialog</title>
+<body style="padding:12px; line-height:1.25; font-size:16px; font-family:Verdana;">
+  <div id=list style="">content </div>
+  <br><br>Return message: <input id="return" size=48 value="that's nice."/>  
+  <button style="position:fixed; bottom:20px; right:30px" onclick="pb.close(pb('return').value)">Close</button>
+</body>
+
+<script>
+window.onPageReady = function () {
+ pb.api( 'position', { width:800, height:600 } )
+ let html = '<p><b>Browser Properties:</b></p>'
+ html += 'allow popupwindow  = ' + pb.property('popupwindow')
+ html += '<br>allow contextmenu  = ' + pb.property('contextmenu')
+ html += '<p><b>Application Properties:</b></p>'
+ html += 'app.path = ' + pb.property('app.path')
+ html += '<br>app.runtime = ' + pb.property('app.runtime')
+ html += '<br>app.hostname = ' + pb.property('app.hostname') 
+ html += '<br>app.commandline = ' + pb.property('app.cmdline')
+ html += '<br>app.version = ' + pb.property('app.version')
+ html += '<br>app.about = ' + pb.property('app.about')
+ html += '<br>app.home  = ' + pb.property('app.home')
+ html += '<p><b>Environment variables:</b></p>'
+ html += 'JAVA_HOME = ' + pb.property('env.JAVA_HOME')
+ html += '<br>TEMP = ' + pb.property('env.TEMP')
+ pb('list').innerHTML = html
+}
+</script>

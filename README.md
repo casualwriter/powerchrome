@@ -28,7 +28,8 @@ Example of PowerChome-Javascript-Interface:
 
 ### Get Started
 
-Just download and unzip the all-in-one package. run powerchrome.exe.
+Please download [powerchrome-0.56-with-runtime.zip](download/powerchrome-0.56-with-runtime.zip) 
+and unzip the all-in-one package. Run powerchrome.exe.
 
 The program will load powerchrome.html as startup page. The page demonstates how Powerchrome work with html as an desktop application.
 
@@ -54,12 +55,12 @@ with significant improvement.
 
 | Comparison       | PowerChrom        | PowerPage
 |------------------|-----------------|----------
-| Web Engine       | Chromimum         | IE 9-11
+| Web Engine       | Chromimum         | IE 11
 | Installation     | portable          | portable
-| Package Size     | 150M              | 14M
+| Package Size     | 170M              | 14M
 | API (javascript) | sync mode         | async mode
 | Developed By     | powerbuilder 2019R3 | powerbuilder 10.5
-| Capability       | all purposes |  simple applicaton
+| Capability       | all purposes        |  simple application
 
 
 ### Security Consideration
@@ -74,11 +75,15 @@ security according your application nature.
 * protect sensitive information (e.g. encrypt password for database login)
 
 
-### To Do List
+### History and To-do List
 
+2022/11/30, release version v0.56
+
+#### To Do List
+
+* documentation - Get Started
 * pb.encode(text, manner), pb.decode(text,manner)
 * pb.datawindow(elementID, parm, action) action:=preview|print|form|report
-* release version v0.60 
 * documentation - API 
 * documentation - development guide
 * local application - markdown editor, web crawler
