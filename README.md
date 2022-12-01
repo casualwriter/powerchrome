@@ -21,7 +21,7 @@ Example of PowerChome-Javascript-Interface:
 
 * Portable, no installation.
 * Chromimum-base, may use Chrome/Chromimum for testing/debug.
-* HTML as application. Javascript for programming.
+* HTML as application. Javascript ES6 for programming.
 * API run in **sync mode**. no callback, no promise object.
 * Work with Powerbuilder for advanced functionality.
 * Simple console support.
