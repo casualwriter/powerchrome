@@ -4,9 +4,9 @@ PowerChrome is a portable chromimum-base (cef) web browser for html/javascript d
 
 PowerChrome provides a natual approach for html/javascript application development. It enabled HTML page for the 
 accessibility of window shell / file system / database, and also provide additional application support 
-by **PowerChome-Javascript-Interface** (run in **sync mode**)
+by **PowerChrome-Javascript-Interface** (run in **sync mode**)
 
-Example of PowerChome-Javascript-Interface:
+Example of PowerChrome-Javascript-Interface:
 
 * Call notepad.exe ``pb.run('notepad.exe')``
 * Eexecute file ``pb.shell('calc.exe')``
@@ -29,39 +29,40 @@ Example of PowerChome-Javascript-Interface:
 
 ### Get Started
 
-Please download [powerchrome-0.56-with-runtime.zip](download/powerchrome-0.56-with-runtime.zip) 
+Please download [powerchrome-0.60-with-runtime.zip](download/powerchrome-0.60-with-runtime.zip) 
 and unzip the all-in-one package. Run powerchrome.exe.
 
-`powerchrome.html` will be loaded to demonstates how PowerChrome work with html desktop application.
+`powerchrome.html` will be loaded to demonstrate how PowerChrome work with html desktop application.
 
 ![](powerchrome.jpg)
 
 ### Application Startup
 
-Powerchrome load the startup page by the following sequence:
+Powerchrome loads the startup page by the following sequence:
 
 1. commandline options: `/app={startup.html}`
 2. ini config at [system] section: `start={startup.html}`
-3. index.html 
-4. powerchrome.html
+3. `index.html` 
+4. `powerchrome.html`
 
-after page loaded, `powerchrome.js` will be imported to initialize interface, then call js function `onPageRead()`
+After page loaded, `powerchrome.js` will be imported to initialize interface, then call js function `onPageRead()`
 
 To start coding, just simply create ``index.html`` and write your code in any text editor
+
 
 ### Files & Deployment
 
 Powerchrome is a single execution file (powerchrome.exe), only `powerchrome.exe, powerchrome.js` 
-and `Powerbuilder-Runtime` is requried. The other files are options or depends on usage.
+and `Powerbuilder-Runtime` are requried. The other files are options or depends on usage.
 
 File Name       | Description
 ----------------|------------------------
 powerchrome.exe | Powerchrome progam 
 powerchrome.ini | ini config file (optional, recommeded for development only)
 powerchrome.js  | javascript interface
-powerchrome.html| html program of introduction an quick reference
+powerchrome.html| default html program. it is API quick reference 
 powerchrome.pbl | source code of Powerbuilder (2019R3)
-sample.mdb      | sample database (MS access)
+sample.mdb      | sample database (MS Access)
 sample-dialog.html | sample html dialog 
 sample-dialog.js  | sample javascript for html dialog 
 
@@ -92,20 +93,21 @@ with significant improvement.
 | Capability       | all purposes        |  simple application
 
 
-### Security Consideration
+### Cloud Mode and Security
 
-All browser revoke the accessibility of system resource (shell/file system/database, etc..), because it is ricky to 
-let html page have the accessibility without proper control.
+Powerchrome will run in **cloud mode** when the startup link start with `https://` or `https://`. 
 
-PowerChrome provides all of them. please be aware the risk of a full-functional html page, and provide sufficient 
-security according your application nature. 
+In cloud mode, **PowerChrome-Javascript-Interface** is available for the url in same domain. 
 
-* should not include unknown (or untrust) javascript library
-* should not visit unknown (or untrust) html page
-* for local mode, protect source program (should not be modified. better not visisble for end-user)
-* protect sensitive information (e.g. encrypt password for database login)
+for example, run chromechrome.exe for web-application:
 
-will discuss more in ``Development Guide -> Security Consideration``.
+```
+powerchrome.exe /app=https://casualwriter.github.io/powerchrome/powerchrome.html
+
+```
+
+API will only available for url start with ``https://casualwriter.github.io/powerchrome/``.
+if navigate to another domain, powerchrome.exe just like normal chromimum browser.
 
 
 ### To Do List
@@ -113,7 +115,6 @@ will discuss more in ``Development Guide -> Security Consideration``.
 * documentation - Get Started
 * documentation - API 
 * documentation - Development Guide
-* firewall of webApp (whitelist,blacklist)
 * pb.datawindow(elementID, parm, action) action:=preview|print|form|report
 * pb.encode(text, manner), pb.decode(text,manner)
 * local application - markdown editor, web crawler
@@ -122,4 +123,5 @@ will discuss more in ``Development Guide -> Security Consideration``.
 ### History
 
 2022/12/01, release version v0.56
+2022/12/09, release v0.60, implement security for cloud mode.
 

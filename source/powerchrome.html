@@ -27,7 +27,7 @@ window.onload = function() {
   // markup content
   let ctn = document.getElementById('content')
   let html = ctn.innerHTML.replace( /``(.+?)``\((.+?)\)/gm, '<code class=command title="$2">$1</code>')
-  ctn.innerHTML = html.replace( /``(.+?)``/gm, '<code class=command title="click to run interface">$1</code>')
+  ctn.innerHTML = html.replace( /``(.+?)``/gm, '<code class=command title="click to run javascript code">$1</code>')
 
   // click event for command.
   let elements = document.getElementsByClassName('command')
@@ -46,9 +46,10 @@ function showResult(exp) {
 // when powerchrome page ready, setup mini button and open console 
 function onPageReady() {
   pb.api( 'minibutton', 'clear' )
+  pb.api( 'minibutton', {script:'pb.about()', title:'About', icon:'toolkitabout!'} )
   pb.api( 'minibutton', {script:"console", title:'Console', icon:'tile!'} )
   pb.api( 'minibutton', {script:'refresh', title:'Refresh', icon:'Synchronizer1!'} )
-  pb.api( 'minibutton', {script:'pb.about()', title:'About', icon:'toolkitabout!'} )
+  pb.api( 'minibutton', {script:'back', title:'Go Back', icon:'Prior3!'} )
 }  
 
 // prompt message before page close 
@@ -60,10 +61,11 @@ function onPageClose() { return 'Close window and exit?' }
 <div id="header" style="background: linear-gradient(to bottom right, #06c, #fc0); color:white; height:20px; padding:12px;">
   <div id="heading" style="float:left;font-size:14px;font-weight:bold">Power Chrome</div>
   <div id="top-right" style="float:right">
- 		<button onclick="window.open('http://html5test.com/', 'new', 'width=1024,height=700')">HTML5-Test</button>
-    <button onclick="pb.alert(navigator.userAgent)">userAgent</button>
- 		<button onclick="pb.about()">About</button>
- 		<button onclick="pb.api('console')">Console</button>
+ 		<button onclick="location.href=this.title" title="https://casualwriter.github.io/powerchrome/">Documentation</button>
+ 		<button onclick="window.open(this.title,'new','width=1024,height=700')" title="http://html5test.com/">HTML5-Test</button>
+    <button onclick="pb.alert(navigator.userAgent)" title="show navigator.userAgent">userAgent</button>
+ 		<button onclick="pb.about()" title="about dialog">About</button>
+ 		<button onclick="pb.api('console')" title="toggle console">Console</button>
   </div>
 </div>
 <div id="result" style="display:none"></div>
@@ -76,7 +78,7 @@ for html/javascript desktop application development.
 <h3>Run Shell Commands</h3>
 <ul>
   <li>Run notepad.exe. ``pb.run('notepad.exe')`` => ``pb.api('run','notepad.exe')`` => ``pb.api('run?notepad.exe')``
-  <li>Run notepad.exe (max/wait mode)  ``pb.run('notepad.exe','pwoerchrome.html','max')``, ``pb.run('notepad.exe','','wait')`` 
+  <li>Run notepad.exe (max/wait mode)  ``pb.run('notepad.exe pwoerchrome.html','','max')``, ``pb.run('notepad.exe','','wait')`` 
   <li>Run notepad2.exe from folder c:/temp. ``pb.run('notepad2.exe', 'c:/temp')``
   <li>shell: open folder/file. ``pb.shell('c:/temp')``, ``pb.shell('powerchrome.html')``
   <li>shell: execute with parm. ``pb.shell('notepad.exe','powerchrome.html')``
@@ -108,7 +110,7 @@ for html/javascript desktop application development.
 <h3>Work with Database</h3>
 <ul>
   <li>connect MS Access (ODBC).  ``pb.dbConnect('ODBC',"connectstring='DRIVER={Microsoft Access Driver (*.mdb)};DBQ=sample.mdb'")``
-  <li>connect oracle (native).  ``pb.dbConnect('O90', '', 'PROFILE', 'scott', 'jaguar')``
+  <li>connect oracle (native).  ``pb.dbConnect('O90', '', 'PROFILE', 'scott', 'tiger')``
   <li>Connect oracle (JDBC). ``pb.dbConnect('JDBC',"Driver='oracle.jdbc.driver.OracleDriver',URL='jdbc:oracle:thin:user/password@db-server:1521/xe'",'','','')``  
   <li>disconnect, commit, rollback.  ``pb.dbDisconnect()``, ``pb.dbCommit()``, ``pb.dbRollback()``
   <li>SQL query, return json string.  ``pb.dbQuery("select * from categories")``
