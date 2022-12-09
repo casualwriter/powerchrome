@@ -1,15 +1,15 @@
 ## PowerChrome for HTML/javascript application
 
-PowerChrome is a portable chromimum-base (cef) web browser for html/javascript desktop application development.
+PowerChrome is a portable chromium-base (cef) web browser for html/javascript desktop application development.
 
-PowerChrome provides a natual approach for html/javascript application development. It enabled HTML page for the 
-accessibility of window shell / file system / database, and also provide additional application support 
+PowerChrome provides a natural approach for html/javascript application development. It enabled HTML page for the 
+accessibility of window shell / file system / database, and also provides additional application support 
 by **PowerChrome-Javascript-Interface** (run in **sync mode**)
 
 Example of PowerChrome-Javascript-Interface:
 
 * Call notepad.exe ``pb.run('notepad.exe')``
-* Eexecute file ``pb.shell('calc.exe')``
+* Execute file ``pb.shell('calc.exe')``
 * Copy File  ``pb.fileCopy( sourceFile, targetFile )``
 * Connect to oracle database ``pb.dbConnect( 'O90', dbParm, dbServer, logID, logPass )``
 * Run SQL query (sync mode) ``rsStr = pb.dbQuery( 'select * from tablename' )``
@@ -20,7 +20,7 @@ Example of PowerChrome-Javascript-Interface:
 #### Features
 
 * Portable, no installation.
-* Chromimum-base, may use Chrome/Chromimum for testing/debug.
+* chromium-base, may use Chrome/chromium for testing/debug.
 * HTML as application. Javascript ES6 for programming.
 * API run in **sync mode**. no callback, no promise object.
 * Work with Powerbuilder for advanced functionality.
@@ -34,7 +34,7 @@ and unzip the all-in-one package. Run powerchrome.exe.
 
 `powerchrome.html` will be loaded to demonstrate how PowerChrome work with html desktop application.
 
-![](powerchrome.jpg)
+![](https://casualwriter.github.io/powerchrome/powerchrome.jpg)
 
 ### Application Startup
 
@@ -53,7 +53,7 @@ To start coding, just simply create ``index.html`` and write your code in any te
 ### Files & Deployment
 
 Powerchrome is a single execution file (powerchrome.exe), only `powerchrome.exe, powerchrome.js` 
-and `Powerbuilder-Runtime` are requried. The other files are options or depends on usage.
+and `Powerbuilder-Runtime` are requried. The other files are optionl or depends on usage.
 
 File Name       | Description
 ----------------|------------------------
@@ -92,7 +92,7 @@ powerchrome.exe /app=https://casualwriter.github.io/powerchrome/powerchrome.html
 ```
 
 API will only available for url start with ``https://casualwriter.github.io/powerchrome/``.
-if navigate to another domain, powerchrome.exe just like normal chromimum browser.
+if navigate to another domain, powerchrome.exe just like normal chromium browser.
 
 
 ### Compare with Powerpage
@@ -102,7 +102,7 @@ with significant improvement.
 
 | Comparison       | PowerChrom        | PowerPage
 |------------------|-----------------|----------
-| Web Engine       | Chromimum         | IE 11
+| Web Engine       | chromium         | IE 11
 | Installation     | portable          | portable
 | Package Size     | 170M              | 14M
 | API (javascript) | sync mode         | async mode
@@ -123,6 +123,6 @@ with significant improvement.
 
 ### History
 
-2022/12/01, release version v0.56
-2022/12/09, release v0.60, implement security for cloud mode.
+* 2022/12/01, release version v0.56
+* 2022/12/09, release v0.60, implement security for cloud mode.
 
