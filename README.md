@@ -78,21 +78,6 @@ sample-dialog.js  | sample javascript for html dialog
 * print page to pdf file ``/ulr={link} /save={name.pdf}``
 
 
-### Compare with Powerpage
-
-PowerChrome is rewritten based on same design idea of [Powerpage](https://github.com/casualwriter/powerpage) 
-with significant improvement.
-
-| Comparison       | PowerChrom        | PowerPage
-|------------------|-----------------|----------
-| Web Engine       | Chromimum         | IE 11
-| Installation     | portable          | portable
-| Package Size     | 170M              | 14M
-| API (javascript) | sync mode         | async mode
-| Developed By     | powerbuilder 2019R3 | powerbuilder 10.5
-| Capability       | all purposes        |  simple application
-
-
 ### Cloud Mode and Security
 
 Powerchrome will run in **cloud mode** when the startup link start with `https://` or `https://`. 
@@ -110,6 +95,21 @@ API will only available for url start with ``https://casualwriter.github.io/powe
 if navigate to another domain, powerchrome.exe just like normal chromimum browser.
 
 
+### Compare with Powerpage
+
+PowerChrome is rewritten based on same design idea of [Powerpage](https://github.com/casualwriter/powerpage) 
+with significant improvement.
+
+| Comparison       | PowerChrom        | PowerPage
+|------------------|-----------------|----------
+| Web Engine       | Chromimum         | IE 11
+| Installation     | portable          | portable
+| Package Size     | 170M              | 14M
+| API (javascript) | sync mode         | async mode
+| Developed By     | powerbuilder 2019R3 | powerbuilder 10.5
+| Capability       | all purposes        |  simple application
+
+
 ### To Do List
 
 * documentation - Get Started
@@ -119,6 +119,7 @@ if navigate to another domain, powerchrome.exe just like normal chromimum browse
 * pb.encode(text, manner), pb.decode(text,manner)
 * local application - markdown editor, web crawler
 * cloud application - oracle schema, oracle helper, db-reporting
+
 
 ### History
 
