@@ -34,25 +34,26 @@ Examples of the PowerChrome JavaScript Interface include:
 
 ### Get Started
 
-Please download [powerchrome-0.60-with-runtime.zip](https://casualwriter.github.io/download/powerchrome-0.60-with-runtime.zip) 
-and unzip the all-in-one package. Run `powerchrome.exe`.
-
-`powerchrome.html` will be loaded to demonstrate how PowerChrome work with html desktop application.
+1. Download [powerchrome-0.60-with-runtime.zip](https://casualwriter.github.io/download/powerchrome-0.60-with-runtime.zip) and unzip the all-in-one package.
+2. Run `powerchrome.exe`.
+3. `powerchrome.html` will be loaded to demonstrate how PowerChrome works with an HTML desktop application.
 
 ![](https://casualwriter.github.io/powerchrome/powerchrome.jpg)
 
+
 ### Application Startup
 
-Powerchrome loads the startup page by the following sequence:
+Powerchrome loads the startup page using the following sequence:
 
-1. commandline options: `/app={startup.html}`
-2. ini config at [system] section: `start={startup.html}`
-3. `index.html` 
-4. `powerchrome.html`
+1. Commandline options: /app={startup.html}
+1. INI config in the [system] section: start={startup.html}
+1. index.html
+1. powerchrome.html
 
-After page loaded, `powerchrome.js` will be imported to initialize interface, then call js function `onPageRead()`
+After the page is loaded, `powerchrome.js` will be imported to initialize the interface, 
+then call the JavaScript function `onPageLoaded()`.
 
-To start coding, just simply create ``index.html`` and write your code in any text editor
+To start coding, simply create an `index.html` file and write your code in any text editor.
 
 
 ### Files & Deployment
