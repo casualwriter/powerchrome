@@ -36,7 +36,7 @@ Examples of the PowerChrome JavaScript Interface include:
 
 1. Download [powerchrome-0.60-with-runtime.zip](https://casualwriter.github.io/download/powerchrome-0.60-with-runtime.zip) and unzip the all-in-one package.
 2. Run `powerchrome.exe`.
-3. `powerchrome.html` will be loaded to demonstrate how PowerChrome works with an HTML desktop application.
+3. `powerchrome.html` will be loaded to demonstrate how PowerChrome works as an HTML desktop application.
 
 ![](https://casualwriter.github.io/powerchrome/powerchrome.jpg)
 
@@ -80,8 +80,8 @@ sample-dialog.js  | sample javascript for html dialog
 * specify application startup page by ``/app={startup.html}`` or ``/url={startup.html}``
 * open application in fullscreen ``/fullscreen`` or ``/kiosk``
 * use customized interface script by ``/script={interface.js}``
-* crawl page by css-selector, and save to html file ``/ulr={link} /save={name.html} /css=selector``
-* print page to pdf file ``/ulr={link} /save={name.pdf}``
+* crawl page by css-selector, and save to html file ``/ulr={link} /save={name.html} /css={selector}``
+* print page to pdf file ``/url={link} /save={name.pdf}``
 
 
 ### Cloud Mode and Security
@@ -131,5 +131,5 @@ with significant improvement.
 
 * 2022/12/01, release version v0.56
 * 2022/12/09, release v0.60, implement security for cloud mode.
-* 2022/12/12, thanks chatGPT to refine some description
+* 2022/12/12, thanks `chatGPT` for refinement of some description
 

@@ -150,4 +150,4 @@ pb.html = function (selector) {
   return html
 }
 
-'url=' + location.href
+'PowerChrome v0.60@2022/12/12'
