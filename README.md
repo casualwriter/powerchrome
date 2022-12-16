@@ -14,8 +14,7 @@ resources. End-user will not understand why your program cannot access printer, 
 run another program or access database. You are hacking problems with hands and legs tied up. 
 
 I had longed for a web browser which has DB connectivity and OS accessibility, so that can 
-coding JavaScript/HTML/CSS application like Electron. so thankful that have chance to make 
-it done by my hands.
+coding JavaScript/HTML/CSS application like Electron. so thankful that have chance to make one.
 
 ### JavaScript Interface
 
@@ -40,7 +39,7 @@ Examples of the PowerChrome JavaScript Interface include:
 * Chromium-based - can use Chrome/Chromium for testing and debugging
 * HTML as the application format and JavaScript ES6 for programming
 * API that runs in sync mode - no callback or promise objects
-* Works with Powerbuilder for advanced functionality
+* Work with Powerbuilder for advanced functionality
 * Simple console support
 * Cloud-app enabled
 * Run on Windows 7/8/10/11
@@ -73,8 +72,8 @@ To start coding, simply create an `index.html` file and write your code in any t
 
 ### Files & Deployment
 
-PowerChrome is a single execution file (powerchrome.exe), only `powerchrome.exe, powerchrome.js` 
-and `Powerbuilder-Runtime` are required. The other files are optional or depends on usage.
+The following files are included in the downloaded package 
+[powerchrome-0.60-with-runtime.zip](https://casualwriter.github.io/download/powerchrome-0.60-with-runtime.zip)
 
 File Name       	| Description
 --------------------|------------------------
@@ -83,9 +82,12 @@ powerchrome.js		| JavaScript interface
 powerchrome.ini 	| INI config file (optional, recommended for development only)
 powerchrome.html	| Default HTML program. it is API quick reference 
 powerchrome.pbl 	| Source code of Powerbuilder (2019R3)
-sample.mdb      	| Sample database (MS Access)
-sample-dialog.html 	| Sample HTML dialog 
-sample-dialog.js  	| Sample JavaScript for HTML dialog 
+sample*.*      	  | Sample files (HTML and MS Access Database)
+*.dll           	| Powerbuilder-Runtime Libraries
+.\pbcef\*.*       | folder for chromium (cef)
+
+PowerChrome is a single execution file (powerchrome.exe), only `powerchrome.exe, powerchrome.js` 
+and `Powerbuilder-Runtime` are required. The other files are optional or depends on usage.
 
 
 ### Command-line Options
@@ -97,6 +99,17 @@ sample-dialog.js  	| Sample JavaScript for HTML dialog
 * use customized interface script by ``/script={interface.js}``
 * crawl page by css-selector, and save to HTML file ``/ulr={link} /save={name.html} /css=selector``
 * print page to PDF file ``/ulr={link} /save={name.pdf}``
+
+### Documenation
+
+Sorry that documentation is still in progress, will be available in https://casualwriter.github.io/powerchrome
+
+* [Getting Started](https://casualwriter.github.io/powerchrome/?file=get-started.md)
+* [Interface (API)](https://casualwriter.github.io/powerchrome/?file=interface.md)
+* [Development Guide](https://casualwriter.github.io/powerchrome/?file=development.md)
+
+
+## Notes
 
 
 ### Cloud Mode and Security
@@ -114,22 +127,21 @@ powerchrome.exe /app=https://casualwriter.github.io/powerchrome/powerchrome.html
 API will only available for URL start with ``https://casualwriter.github.io/powerchrome/``.
 If navigate to another domain, PowerChrome works like normal chromium browser.
 
-## Notes
 
 ### About Powerbuilder
 
-NO NEED to know anything about Powerbuilder if just develop HTML/JavaScript application.
+**No need to know anything about Powerbuilder** if just develop HTML/JavaScript application.
 
-PowerChrome is developed using Powerbuilder 2019R3, (which is regarded outdated in
-development world). PowerChrome inherits some nice features you 'd like to know:
+PowerChrome is developed using `Powerbuilder 2019R3`, (which is regarded outdated in
+development world?). PowerChrome inherits some nice features from Powerbuilder.
 
-#### Connect to database 
+#### Connect to database by native driver
 
 PowerChrome uses **native driver** to connect major database server (i.e. Oracle, Sybase, MS SQL Server, Informix), 
 which is more stable and efficient than JDBC/ODBC/ADO, as long as still can use JDBC/ODBC/ADO/OLE-DB to connect 
 all kind of database.
 
-#### Report builder
+#### Datawindow and Report Builder
 
 PowerChrome will make use of `Datawindow` for reporting. Any version of Powerbuilder IDE could be used 
 as a report builder. 
@@ -143,7 +155,7 @@ PowerChrome is able to call window/function/datawindow/userobject in Powerbuilde
 
 * documentation - API 
 * documentation - Development Guide
-* pb.datawindow(elementID, parm, action) action:=preview|print|form|report
+* pb.datawindow(dwSyntax, parm, action), action:=preview|print|form|report
 * pb.encode(text, manner), pb.decode(text,manner)
 * local application - markdown editor, web crawler
 * cloud application - oracle schema, oracle helper, db-reporting
@@ -153,4 +165,4 @@ PowerChrome is able to call window/function/datawindow/userobject in Powerbuilde
 
 * 2022/12/01, release version v0.56
 * 2022/12/09, release v0.60, implement security for cloud mode.
-* 2022/12/16, documentation - Home, Getting Started. (in progress)
+* 2022/12/16, update document, (Home, Getting Started, API, in progress)
