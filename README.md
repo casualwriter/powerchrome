@@ -38,12 +38,12 @@ Examples of the PowerChrome JavaScript Interface include:
 * Portable - no installation required
 * Chromium-based - can use Chrome/Chromium for testing and debugging
 * HTML as the application format and JavaScript ES6 for programming
-* API that runs in sync mode - no callback or promise objects
-* Work with Powerbuilder for advanced functionality
+* API runs in sync mode - no callback or promise objects
 * Simple console support
 * Cloud-app enabled
 * Run on Windows 7/8/10/11
-
+  
+  
 ## Get Started
 
 ### Download and Run
@@ -68,53 +68,42 @@ After the page is loaded, `powerchrome.js` will be imported to initialize the in
 then call the JavaScript function `onPageLoaded()`.
 
 To start coding, simply create an `index.html` file and write your code in any text editor.
-
+  
 
 ### Files & Deployment
 
 The following files are included in the downloaded package 
 [powerchrome-0.60-with-runtime.zip](https://casualwriter.github.io/download/powerchrome-0.60-with-runtime.zip)
 
-File Name       	| Description
---------------------|------------------------
-powerchrome.exe 	| PowerChrome program 
-powerchrome.js		| JavaScript interface
-powerchrome.ini 	| INI config file (optional, recommended for development only)
-powerchrome.html	| Default HTML program. it is API quick reference 
-powerchrome.pbl 	| Source code of Powerbuilder (2019R3)
-sample*.*      	  | Sample files (HTML and MS Access Database)
-*.dll           	| Powerbuilder-Runtime Libraries
-.\pbcef\*.*       | folder for chromium (cef)
+Deploy | File Name       	| Description
+-------|--------------------|------------------------
+Yes | powerchrome.exe 	| PowerChrome program 
+Yes | powerchrome.js		| JavaScript interface
+    | powerchrome.ini 	| INI config file (optional, recommended for development only)
+    | powerchrome.html	| Default HTML program. it is API quick reference 
+    | powerchrome.pbl 	| Source code of Powerbuilder (2019R3)
+    | sample*.*      	  | Sample files (HTML and MS Access Database)
+Yes | *.dll           	| Powerbuilder-Runtime Libraries
+Yes | .\pbcef           | chromium (cef)
 
 PowerChrome is a single execution file (powerchrome.exe), only `powerchrome.exe, powerchrome.js` 
 and `Powerbuilder-Runtime` are required. The other files are optional or depends on usage.
-
+  
 
 ### Command-line Options
 
-``powerchrome.exe /app={startup.html} /fullscreen /script={interface.js} /save={name.html} /save={name.pdf} /select={selector}``    
+``powerchrome.exe /app={startup.html} /fullscreen /script={interface.js} /save={name.html} /save={name.pdf} /select={selector}``  
 
 * specify application startup page by ``/app={startup.html}`` or ``/url={startup.html}``
-* open application in fullscreen ``/fullscreen`` or ``/kiosk``
+* open application in fullscreen by ``/fullscreen`` or ``/kiosk``
 * use customized interface script by ``/script={interface.js}``
-* crawl page by css-selector, and save to HTML file ``/ulr={link} /save={name.html} /css=selector``
-* print page to PDF file ``/ulr={link} /save={name.pdf}``
-
-### Documenation
-
-Sorry that documentation is still in progress, will be available in https://casualwriter.github.io/powerchrome
-
-* [Getting Started](https://casualwriter.github.io/powerchrome/?file=get-started.md)
-* [Interface (API)](https://casualwriter.github.io/powerchrome/?file=interface.md)
-* [Development Guide](https://casualwriter.github.io/powerchrome/?file=development.md)
-
-
-## Notes
-
-
+* crawl page by css-selector, and save to HTML file ``/url={link} /save={name.html} /css=selector``
+* print page to PDF file ``/url={link} /save={name.pdf}``
+  
+  
 ### Cloud Mode and Security
 
-PowerChrome will run in **cloud-mode** when the startup link start with `https://` or `https://`. 
+PowerChrome will run in **cloud-mode** when the startup link start with `https://` or `http://`. 
 
 In cloud mode, **PowerChrome-JavaScript-Interface** is available for the URL in **SAME DOMAIN**. 
 
@@ -126,43 +115,21 @@ powerchrome.exe /app=https://casualwriter.github.io/powerchrome/powerchrome.html
 
 API will only available for URL start with ``https://casualwriter.github.io/powerchrome/``.
 If navigate to another domain, PowerChrome works like normal chromium browser.
+  
+  
+## Documenation
 
+still working on Documentation at https://casualwriter.github.io/powerchrome
 
-### About Powerbuilder
+* [Document Home](https://casualwriter.github.io/powerchrome/?file=index.md)
+* [Getting Started](https://casualwriter.github.io/powerchrome/?file=get-started.md)
+* [Interface (API)](https://casualwriter.github.io/powerchrome/?file=interface.md)
+* [Development Guide](https://casualwriter.github.io/powerchrome/?file=development.md)
 
-**No need to know anything about Powerbuilder** if just develop HTML/JavaScript application.
-
-PowerChrome is developed using `Powerbuilder 2019R3`, (which is regarded outdated in
-development world?). PowerChrome inherits some nice features from Powerbuilder.
-
-#### Connect to database by native driver
-
-PowerChrome uses **native driver** to connect major database server (i.e. Oracle, Sybase, MS SQL Server, Informix), 
-which is more stable and efficient than JDBC/ODBC/ADO, as long as still can use JDBC/ODBC/ADO/OLE-DB to connect 
-all kind of database.
-
-#### Datawindow and Report Builder
-
-PowerChrome will make use of `Datawindow` for reporting. Any version of Powerbuilder IDE could be used 
-as a report builder. 
-
-#### Interact with PB objects
-
-PowerChrome is able to call window/function/datawindow/userobject in Powerbuilder Libraries. 
-
-
-### To Do List
-
-* documentation - API 
-* documentation - Development Guide
-* pb.datawindow(dwSyntax, parm, action), action:=preview|print|form|report
-* pb.encode(text, manner), pb.decode(text,manner)
-* local application - markdown editor, web crawler
-* cloud application - oracle schema, oracle helper, db-reporting
-
-
+  
 ### History
 
 * 2022/12/01, release version v0.56
 * 2022/12/09, release v0.60, implement security for cloud mode.
-* 2022/12/16, update document, (Home, Getting Started, API, in progress)
+* 2022/12/16-2023/01/04, update document, (Home, Getting Started, API, in progress..)
+

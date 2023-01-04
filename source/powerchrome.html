@@ -62,7 +62,7 @@ function onPageClose() { return 'Close window and exit?' }
   <div id="heading" style="float:left;font-size:14px;font-weight:bold">Power Chrome</div>
   <div id="top-right" style="float:right">
  		<button onclick="location.href=this.title" title="https://casualwriter.github.io/powerchrome/">Documentation</button>
- 		<button onclick="window.open(this.title,'new','width=1024,height=700')" title="http://html5test.com/">HTML5-Test</button>
+ 		<button onclick="window.open(this.title,'new','width=1024,height=700')" title="https://html5test.com/">HTML5-Test</button>
     <button onclick="pb.alert(navigator.userAgent)" title="show navigator.userAgent">userAgent</button>
  		<button onclick="pb.about()" title="about dialog">About</button>
  		<button onclick="pb.api('console')" title="toggle console">Console</button>
@@ -78,24 +78,25 @@ for html/javascript desktop application development.
 <h3>Run Shell Commands</h3>
 <ul>
   <li>Run notepad.exe. ``pb.run('notepad.exe')`` => ``pb.api('run','notepad.exe')`` => ``pb.api('run?notepad.exe')``
-  <li>Run notepad.exe (max/wait mode)  ``pb.run('notepad.exe pwoerchrome.html','','max')``, ``pb.run('notepad.exe','','wait')`` 
+  <li>Run notepad.exe (max/wait mode)  ``pb.run('notepad.exe powerchrome.html','','max')``, ``pb.run('notepad.exe','','wait')`` 
   <li>Run notepad2.exe from folder c:/temp. ``pb.run('notepad2.exe', 'c:/temp')``
   <li>shell: open folder/file. ``pb.shell('c:/temp')``, ``pb.shell('powerchrome.html')``
   <li>shell: execute with parm. ``pb.shell('notepad.exe','powerchrome.html')``
   <li>shell: print file. ``pb.shell('c:/temp/output.pdf', '', '','print')``
- 	<li>Send keystrokes. ``pb.sendkeys('run=notepad.exe/title=Untitled - Notepad/s=1/this is a test!\n/s=3/hello!')``
+ 	<li>Send keystrokes. ``pb.sendkeys('run=notepad.exe/title=Untitled - Notepad/s=1/hello!\n/ms=800/Have a nice day!')``
+  <li>Run javascript with keystrokes. ``pb.sendkeys('run=notepad.exe/s=2/Hello/js=alert("hello world")')``
 </ul>
 
 <h3>HTML Dialog</h3>
 <ul>
   <li>popup html dialog  ``pb.popup('https://news.ycombinator.com/')``
-  <li>popup html, set width/height.  ``pb.popup('https://dev.to/', {width:1024, height:700} )``
+  <li>popup html, set width/height.  ``pb.popup('https://html5test.com/', {width:1024, height:700} )``
   <li>popup html, set x, y, width  ``pb.popup('https://news.ycombinator.com/', {left:200, top:300, width:400, height:200})``
   <li>popup html, save to file  ``pb.popup( 'https://news.ycombinator.com/', {save:'hackernews.html', select:'table'} )``
   <li>min dialog, save to PDF   ``pb.popup( 'https://news.ycombinator.com/', {save:'./hackernews.pdf', mode:'min'} )``
-  <li>Crawl selected html for url  ``pb.popup( 'https://news.ycombinator.com/front', {select:'table'} )``
-  <li>Open dialog, return string when close. ``pb.popup( 'sample-dialog.html' )``
-  <li>render html page by string ``pb.popup( pb('sub-page').innerHTML, { width:500, height:300 } )``
+  <li>crawl selected html for url  ``pb.popup( 'https://news.ycombinator.com/front', {select:'table'} )``
+  <li>open dialog, return string when close. ``pb.popup( 'sample-dialog.html' )``
+  <li>render page by html string ``pb.popup( pb('sub-page').innerHTML, { width:500, height:300 } )``
   <li>inject javascript  ``pb.popup( 'sample-dialog.html', {script:"pb.alert('welcome')"} )``
   <li>import js file  ``pb.popup( 'sample-dialog.html', {import:"sample-dialog.js"} )``
 </ul>
@@ -104,7 +105,7 @@ for html/javascript desktop application development.
 <ul>
   <li>get source of url  ``'&lt;xmp>' + pb.httpSource('https://casualwriter.github.io') + '&lt;/xmp>'``
   <li>get json data     ``rs = pb.httpSource('https://hacker-news.firebaseio.com/v0/item/2921983.json')``
-  <li>get http Request ``'&lt;xmp>' + pb.httpRequest('GET','https://www.google.com/search?q=html') + '&lt;/xmp>'``
+  <li>send http Request ``'&lt;xmp>' + pb.httpRequest('GET','https://www.google.com/search?q=html') + '&lt;/xmp>'``
 </ul>
 
 <h3>Work with Database</h3>
@@ -123,7 +124,8 @@ for html/javascript desktop application development.
 
 <h3>Access File System</h3>
 <ul>
-  <li>Append text to file.  ``pb.fileAppend('sample.txt', 'this is a sample file\n\ntest for file functions')``
+  <li>Write text to file.  ``pb.fileWrite('sample1.txt', 'Hello World! 简体繁體\n')``
+  <li>Append text to file.  ``pb.fileAppend('sample.txt', 'this is a sample file\n\ntest 简体繁體\n')``
   <li>Read text from file.  ``pb.fileRead('sample.txt')``
   <li>Copy file. ``pb.fileCopy( 'sample.txt', 'sample1.txt' )``
   <li>Move file. ``pb.fileMove( 'sample.txt', 'sample2.txt' )``
@@ -149,7 +151,7 @@ for html/javascript desktop application development.
 <h3>Work with Powerbuilder</h3>
 <ul>
   <li>open w_about dialog.  ``pb.window('w_about')`` => ``pb.api('window','w_about')``
-  <li>login by window account  ``pb.window('w_login')`` => ``pb.api('window','w_login')``
+  <li>login by windows account  ``pb.window('w_login')`` => ``pb.api('window','w_login')``
   <li>open window with parameters.  ``pb.window('w_power_chrome', 'https://news.ycombinator.com/')``
   <li>open dialog with parameters.  ``pb.popup('https://news.ycombinator.com/')``
   <li>* retrieve datawindow (reprot)  ``pb.datawindow('element-id', 'parameters')``

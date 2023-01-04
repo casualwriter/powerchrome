@@ -1,5 +1,5 @@
-//==================================================================================
-// Copyright 2022, casualwriter, All Rights Reserved.
+﻿//==================================================================================
+// Copyright 2022-2023, casualwriter, All Rights Reserved.
 // PB interface for [PowerChrome](https://github.com/casualwriter/powerchrome) 
 //==================================================================================
 'use strict';
@@ -28,8 +28,8 @@ pb.api = ( cmd, args ) => {
 if (typeof window.webBrowser === "undefined") {
   //=== polyfill window.webBrowser if loaded by chrome
   window.webBrowser = { name: 'simulate webBrowser object' }
-  window.webBrowser.ue_interface = x => { console.log('[api]',x); return x }
-  window.webBrowser.ue_message = x => { console.log('[api]',x); return x }
+  window.webBrowser.ue_interface = (x) => { console.log('[api]',x); return x }
+  window.webBrowser.ue_message = (x) => { console.log('[api]',x); return x }
 } else {
   //=== console support if loaded by PowerChrome
   console.log = pb.console = function () {
@@ -41,7 +41,7 @@ if (typeof window.webBrowser === "undefined") {
         msg += (i==0?'':', ') + arguments[i]
       }
     }
-    window.webBrowser.ue_message('console?' + msg)  
+    return window.webBrowser.ue_message('console?' + msg)  
   }
 } 
 
@@ -150,4 +150,4 @@ pb.html = function (selector) {
   return html
 }
 
-'PowerChrome v0.60@2022/12/12'
+'PowerChrome v0.60b@2023/01/04'
