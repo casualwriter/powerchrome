@@ -48,7 +48,7 @@ For example,
 
 ### Download and Run
 
-1. Download [powerchrome-0.60-with-runtime.zip](https://casualwriter.github.io/download/powerchrome-0.60-with-runtime.zip) and unzip the all-in-one package.
+1. Download [powerchrome-0.62-with-runtime.zip](https://casualwriter.github.io/download/powerchrome-0.62-with-runtime.zip) and unzip the all-in-one package.
 2. Run `powerchrome.exe`.
 3. `powerchrome.html` will be loaded to demonstrate how PowerChrome works with an HTML desktop application.
 
