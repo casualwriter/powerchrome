@@ -114,7 +114,7 @@ pb.fileRead   = (file) => { return pb.api( 'file-read', {name:file} ) }
 pb.fileAppend = (file, text) => { return pb.api( 'file-append', { name:file, text:text } ) }
 pb.fileWrite  = (file, text) => { return pb.api( 'file-write', { name:file, text:text } ) }
 pb.fileCopy = (src, target)  => { return pb.api('file-copy', {source:src, target:target }) }
-pb.fileMove = (src, tartet)  => { return pb.api('file-move', {source:src, target:target }) }
+pb.fileMove = (src, target)  => { return pb.api('file-move', {source:src, target:target }) }
 
 pb.fileOpenDialog = (title, path, filter) => { 
   return pb.api( 'file-open-dialog', { title: title, path: path, filter: filter } ) 
@@ -150,4 +150,4 @@ pb.html = function (selector) {
   return html
 }
 
-'PowerChrome v0.60b@2023/01/04'
+'PowerChrome v0.60c@2023/01/06'

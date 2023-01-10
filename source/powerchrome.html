@@ -3,19 +3,22 @@
 <title>PowerChrome</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body   { font-family:Verdana,sans-serif; font-size:14px; line-height:1.5; margin:auto; padding:0; background:#222; color:#ccc }  
-div    { font-size:14px; margin:0; padding:0; }
-table  { border-collapse: collapse;  } 
-td, th { border:1px solid grey; padding:4px; }
-h3, h4, h5 { color: #bcf }
-.command { background:#555; color:#ccc; padding:1px 8px; margin:0 12px; border-radius:6px;}
+body    { font-family:Verdana,sans-serif; font-size:14px; line-height:1.5; margin:auto; padding:0; background:#222; color:#ccc }  
+div     { font-size:14px; margin:0; padding:0; }
+table   { border-collapse: collapse;  } 
+td, th  { border:1px solid grey; padding:4px; }
+h2      { color: #fc0 }
+h3, h4, h5, h6 { color: #bcf }
+code    { background:#555; color:#ccc; padding:1px 8px; margin:0 12px; border-radius:6px; }
+header  { background: linear-gradient(to bottom right, #06c, #fc0); color:white; height:20px; padding:12px; }
 #result { position:fixed; top:60px; right:30px; width:500px; border:1px solid grey; background:#555; padding:12px; }
 </style>
 </head>
 
-<!--------------------- Script Section ------------------------>
+<!-------------------------- Script Section --------------------------->
 <script>
 window.onload = function() {
+
   // if run in chrome browser, load interface for debug
   if (typeof webBrowser === "undefined") {
     let scriptEle = document.createElement("script");
@@ -24,14 +27,21 @@ window.onload = function() {
     document.body.appendChild(scriptEle);
   } 
 
-  // markup content
+  // render content (in simple markdown format)
   let ctn = document.getElementById('content')
-  let html = ctn.innerHTML.replace( /``(.+?)``\((.+?)\)/gm, '<code class=command title="$2">$1</code>')
-  ctn.innerHTML = html.replace( /``(.+?)``/gm, '<code class=command title="click to run javascript code">$1</code>')
+  let mdstr = ctn.innerHTML.replace(/\r\n/g, '\n')
+  mdstr = mdstr.replace(/^## (.*?)\s*#*$/gm, '<h2>$1</h2>')
+  mdstr = mdstr.replace(/^### (.*?)\s*#*$/gm, '<h3>$1</h3>')
+  mdstr = mdstr.replace(/\*\*(\w.*?[^\\])\*\*/gm, '<b>$1</b>')
+  mdstr = mdstr.replace(/^[\*+-][ .](.*)/gm, '<ul><li>$1</li></ul>' )
+  mdstr = mdstr.replace(/<\/[ou]l\>\n<[ou]l\>/g, '\n' )
+  mdstr = mdstr.replace( /``(.+?)``/gm, '<code class=sample title="doubleclick to run javascript code">$1</code>')
+  mdstr = mdstr.replace( /`(.+?)`/gm, '<code>$1</code>' )
+  ctn.innerHTML = mdstr.replace(/  \n/g, '\n<br/>').replace(/\n\s*\n/g, '\n<p>\n')
 
   // click event for command.
-  let elements = document.getElementsByClassName('command')
-  for (let i in elements) elements[i].onclick = function () { showResult(this.innerText) };
+  let elements = document.getElementsByClassName('sample')
+  for (let i in elements) elements[i].ondblclick = function () { showResult(this.innerText) };
   
 } 
 
@@ -58,7 +68,7 @@ function onPageClose() { return 'Close window and exit?' }
 </script>
 
 <body>
-<div id="header" style="background: linear-gradient(to bottom right, #06c, #fc0); color:white; height:20px; padding:12px;">
+<header>
   <div id="heading" style="float:left;font-size:14px;font-weight:bold">Power Chrome</div>
   <div id="top-right" style="float:right">
  		<button onclick="location.href=this.title" title="https://casualwriter.github.io/powerchrome/">Documentation</button>
@@ -67,130 +77,139 @@ function onPageClose() { return 'Close window and exit?' }
  		<button onclick="pb.about()" title="about dialog">About</button>
  		<button onclick="pb.api('console')" title="toggle console">Console</button>
   </div>
-</div>
+</header>
+
 <div id="result" style="display:none"></div>
-<div id="content" style="border:1px solid grey;padding:12px;">
-<h2 style="color:#fc0">Develop desktop application using html/javascript!</h2>
-<p><b style="color:#fc0">PowerChrome</b> is a portable Chromium-base (cef) web browser 
-for html/javascript desktop application development.
-</p>
 
-<h3>Run Shell Commands</h3>
-<ul>
-  <li>Run notepad.exe. ``pb.run('notepad.exe')`` => ``pb.api('run','notepad.exe')`` => ``pb.api('run?notepad.exe')``
-  <li>Run notepad.exe (max/wait mode)  ``pb.run('notepad.exe powerchrome.html','','max')``, ``pb.run('notepad.exe','','wait')`` 
-  <li>Run notepad2.exe from folder c:/temp. ``pb.run('notepad2.exe', 'c:/temp')``
-  <li>shell: open folder/file. ``pb.shell('c:/temp')``, ``pb.shell('powerchrome.html')``
-  <li>shell: execute with parm. ``pb.shell('notepad.exe','powerchrome.html')``
-  <li>shell: print file. ``pb.shell('c:/temp/output.pdf', '', '','print')``
- 	<li>Send keystrokes. ``pb.sendkeys('run=notepad.exe/title=Untitled - Notepad/s=1/hello!\n/ms=800/Have a nice day!')``
-  <li>Run javascript with keystrokes. ``pb.sendkeys('run=notepad.exe/s=2/Hello/js=alert("hello world")')``
-</ul>
+<article id="content" style="border:1px solid grey;padding:12px;">
 
-<h3>HTML Dialog</h3>
-<ul>
-  <li>popup html dialog  ``pb.popup('https://news.ycombinator.com/')``
-  <li>popup html, set width/height.  ``pb.popup('https://html5test.com/', {width:1024, height:700} )``
-  <li>popup html, set x, y, width  ``pb.popup('https://news.ycombinator.com/', {left:200, top:300, width:400, height:200})``
-  <li>popup html, save to file  ``pb.popup( 'https://news.ycombinator.com/', {save:'hackernews.html', select:'table'} )``
-  <li>min dialog, save to PDF   ``pb.popup( 'https://news.ycombinator.com/', {save:'./hackernews.pdf', mode:'min'} )``
-  <li>crawl selected html for url  ``pb.popup( 'https://news.ycombinator.com/front', {select:'table'} )``
-  <li>open dialog, return string when close. ``pb.popup( 'sample-dialog.html' )``
-  <li>render page by html string ``pb.popup( pb('sub-page').innerHTML, { width:500, height:300 } )``
-  <li>inject javascript  ``pb.popup( 'sample-dialog.html', {script:"pb.alert('welcome')"} )``
-  <li>import js file  ``pb.popup( 'sample-dialog.html', {import:"sample-dialog.js"} )``
-</ul>
+## Develop desktop application using html/javascript!
 
-<h3>Http Request</h3>
-<ul>
-  <li>get source of url  ``'&lt;xmp>' + pb.httpSource('https://casualwriter.github.io') + '&lt;/xmp>'``
-  <li>get json data     ``rs = pb.httpSource('https://hacker-news.firebaseio.com/v0/item/2921983.json')``
-  <li>send http Request ``'&lt;xmp>' + pb.httpRequest('GET','https://www.google.com/search?q=html') + '&lt;/xmp>'``
-</ul>
+**PowerChrome** is a portable chromium-base web browser to enable fast and easy development of 
+desktop applications using HTML and JavaScript.
 
-<h3>Work with Database</h3>
-<ul>
-  <li>connect MS Access (ODBC).  ``pb.dbConnect('ODBC',"connectstring='DRIVER={Microsoft Access Driver (*.mdb)};DBQ=sample.mdb'")``
-  <li>connect oracle (native).  ``pb.dbConnect('O90', '', 'PROFILE', 'scott', 'tiger')``
-  <li>Connect oracle (JDBC). ``pb.dbConnect('JDBC',"Driver='oracle.jdbc.driver.OracleDriver',URL='jdbc:oracle:thin:user/password@db-server:1521/xe'",'','','')``  
-  <li>disconnect, commit, rollback.  ``pb.dbDisconnect()``, ``pb.dbCommit()``, ``pb.dbRollback()``
-  <li>SQL query, return json string.  ``pb.dbQuery("select * from categories")``
-  <li>SQL query, get json.  ``rs = JSON.parse(pb.dbQuery('select * from categories')); rs.rowCount``
-  <li>SQL query, return html table.  ``pb.dbTable('select * from categories')``
-  <li>Insert Record. ``pb.dbExecute("insert into categories values (99, 'PowerChrome', 'Test Record', '')")``
-  <li>Update Record. ``pb.dbExecute("update categories set remarks='English,繁體,简体' where CategoryName='PowerChrome'")``
-  <li>Delete Record. ``pb.dbExecute("delete from categories where CategoryName like 'PowerChrome%'")``
-</ul>
+PowerChrome enables HTML pages to access the window shell, file system, and database, and provides 
+additional application services by `PowerChrome JavaScript Interface` in **sync mode**.
 
-<h3>Access File System</h3>
-<ul>
-  <li>Write text to file.  ``pb.fileWrite('sample1.txt', 'Hello World! 简体繁體\n')``
-  <li>Append text to file.  ``pb.fileAppend('sample.txt', 'this is a sample file\n\ntest 简体繁體\n')``
-  <li>Read text from file.  ``pb.fileRead('sample.txt')``
-  <li>Copy file. ``pb.fileCopy( 'sample.txt', 'sample1.txt' )``
-  <li>Move file. ``pb.fileMove( 'sample.txt', 'sample2.txt' )``
-  <li>Delete file. ``pb.fileDelete('sample1.txt')``, ``pb.fileDelete('sample2.txt')``
-  <li>Select file for open ``pb.fileOpenDialog()``, for save ``pb.fileSaveDialog('Save File','c:\\temp\\*.txt','Text File(*.txt),*.txt')``
-  <li>file/dir Exists ``pb.fileExists('sample.txt')``, ``pb.dirExists('c:/temp')``
-  <li>show current folder  ``pb.dir()``, select folder ``pb.dirSelect('Select folder for testing')``
-  <li>change directory  ``pb.dirChange('tempfolder')``, ``pb.dirChange('..')``, ``pb.dirChange(pb.property('app.path'))``
-  <li>create/delete directory ``pb.dirCreate('tempfolder')``, ``pb.dirDelete('tempfolder')``
-</ul>
+**Double-click** to run the sample code in the code-block, for the first impression of the API.
 
-<h3>Application Property and Session Variables</h3>
-<ul>
-  <li>App Title:  ``pb.property('app.title')``, ``pb.property('app.title', 'window title: name of your application.')``,
-  <li>App About:  ``pb.property('app.about')``, ``pb.property('app.about', 'about: description of your application!')``,
-  <li>App Version:  ``pb.property('app.version')``, ``pb.property('app.version', '0.32 updated on 2022/11/10')``, 
-  <li>Watch Options:  ``pb.property('app.watch')``, ``pb.property('app.watch', '[debug][api]')``
-  <li>App Icon:  ``pb.property('app.icon')``, ``pb.property('app.icon', 'menu!')``,
-  <li>get Env variable:  ``pb.property('env.JAVA_HOME')``, ``pb.property('env.CLASSPATH')``,
-  <li>Session variable:  ``pb.session('name','casualwriter')``, ``pb.session('name')``
-</ul>
 
-<h3>Work with Powerbuilder</h3>
-<ul>
-  <li>open w_about dialog.  ``pb.window('w_about')`` => ``pb.api('window','w_about')``
-  <li>login by windows account  ``pb.window('w_login')`` => ``pb.api('window','w_login')``
-  <li>open window with parameters.  ``pb.window('w_power_chrome', 'https://news.ycombinator.com/')``
-  <li>open dialog with parameters.  ``pb.popup('https://news.ycombinator.com/')``
-  <li>* retrieve datawindow (reprot)  ``pb.datawindow('element-id', 'parameters')``
-</ul>
+### Run Shell Commands
 
-<h3>Console and Message</h3>
-<ul>
-  <li>console support. ``pb.console('hello world!')`` is same as ``console.log('hello world again!')``
-  <li>status message, microhelp. ``pb.status('ready')``, ``pb.error('404','File not found!')``
-  <li>alert, message dialog. ``pb.alert('good day!')``, ``pb.msgbox('hello','good day!')``
-  <li>message dialog with options. ``pb.msgbox('','Save data?','yes,no')``, ``pb.msgbox('title..','close?','ok,cancel')``
-</ul>
+* Run notepad.exe. ``pb.run('notepad.exe')`` => ``pb.api('run','notepad.exe')`` => ``pb.api('run?notepad.exe')``
+* Run notepad.exe (max/wait mode)  ``pb.run('notepad.exe powerchrome.html','','max')``, ``pb.run('notepad.exe','','wait')`` 
+* Run notepad2.exe from folder c:/temp. ``pb.run('notepad2.exe', 'c:/temp')``
+* shell: open folder/file. ``pb.shell('c:/temp')``, ``pb.shell('powerchrome.html')``
+* shell: execute with parm. ``pb.shell('notepad.exe','powerchrome.html')``
+* shell: print file. ``pb.shell('c:/temp/output.pdf', '', '','print')``
+* Send keystrokes. ``pb.sendkeys('run=notepad.exe/title=Untitled - Notepad/s=1/hello!\n/ms=800/Have a nice day!')``
+* Run javascript with keystrokes. ``pb.sendkeys('run=notepad.exe/s=1/Hello/s=2/js=alert("hello world")')``
 
-<h3>Print, PDF, Misc</h3>
-<ul>
-  <li>Print, PrintSetup:  ``window.print()``, ``pb.print()``, ``pb.printSetup()``
-  <li>Save to PDF/HTML:  ``pb.saveas('c:/temp/output.pdf')``,  ``pb.saveas('c:/temp/output.html')``
-  <li>Window Position: ``pb.api('position' ,'max')``, ``pb.api('position', {top:200, left:80, width:1024, height:700})``
-  <li>Show/hide console: ``pb.api('console','show')``, ``pb.api('console','hide')``, ``pb.api('console','500px')``, ``pb.api('console')``
- 	<li>Mini Button  ``pb.api('minibutton','clear')``, ``pb.api('minibutton',{script:'about', title:'About', icon:'toolkitabout!'})``
-  <li>Close window: ``pb.close()`` => ``pb.api('close')``, Close with return: ``pb.api('close','return result')``
-  <li>Sleep (ms): ``pb.sleep(2500)``
-</ul>
 
-</div>
+### HTML Dialog
 
-<xmp id="sub-page" title="use to render html-dialog" style="display:xnone">
+* popup html dialog  ``pb.popup('https://news.ycombinator.com/')``
+* popup html, set width/height.  ``pb.popup('https://html5test.com/', {width:1024, height:700} )``
+* popup html, set x, y, width  ``pb.popup('https://news.ycombinator.com/', {left:200, top:300, width:600, height:500})``
+* popup html, save to file  ``pb.popup( 'https://news.ycombinator.com/', {save:'hackernews.html', select:'table'} )``
+* min dialog, save to PDF   ``pb.popup( 'https://news.ycombinator.com/', {save:'./hackernews.pdf', mode:'min'} )``
+* crawl selected html for url  ``pb.popup( 'https://news.ycombinator.com/front', {select:'table'} )``
+* open dialog, return string when close. ``pb.popup( 'sample-dialog.html' )``
+* render page by html string ``pb.popup( pb('sub-page').innerHTML, { width:500, height:300 } )``
+* inject javascript  ``pb.popup( 'sample-dialog.html', {script:"pb.alert('welcome')"} )``
+* import js file  ``pb.popup( 'sample-dialog.html', {import:"sample-dialog.js"} )``
+
+
+### Http Request
+
+* get source of url  ``'&lt;xmp>' + pb.httpSource('https://casualwriter.github.io') + '&lt;/xmp>'``
+* get json data     ``rs = pb.httpSource('https://hacker-news.firebaseio.com/v0/item/2921983.json')``
+* send http Request ``'&lt;xmp>' + pb.httpRequest('GET','https://www.google.com/search?q=html') + '&lt;/xmp>'``
+
+
+### Work with Database
+
+* connect MS Access (ODBC).  ``pb.dbConnect('ODBC',"connectstring='DRIVER={Microsoft Access Driver (*.mdb)};DBQ=sample.mdb'")``
+* connect oracle (native).  ``pb.dbConnect('O90', '', 'PROFILE', 'scott', 'tiger')``
+* Connect oracle (JDBC). ``pb.dbConnect('JDBC',"Driver='oracle.jdbc.driver.OracleDriver',URL='jdbc:oracle:thin:user/password@db-server:1521/xe'",'','','')``  
+* disconnect, commit, rollback.  ``pb.dbDisconnect()``, ``pb.dbCommit()``, ``pb.dbRollback()``
+* SQL query, return json string.  ``pb.dbQuery("select * from categories")``
+* SQL query, get json.  ``rs = JSON.parse(pb.dbQuery('select * from categories')); rs.rowCount``
+* SQL query, return html table.  ``pb.dbTable('select * from categories')``
+* Insert Record. ``pb.dbExecute("insert into categories values (99, 'PowerChrome', 'Test Record', '')")``
+* Update Record. ``pb.dbExecute("update categories set remarks='English,繁體,简体' where CategoryName='PowerChrome'")``
+* Delete Record. ``pb.dbExecute("delete from categories where CategoryName like 'PowerChrome%'")``
+
+
+### Access File System
+
+* Write text to file.  ``pb.fileWrite('sample.txt', 'Hello World!\n')``
+* Append text to file.  ``pb.fileAppend('sample.txt', '\nHello world again!\n')``
+* Read text from file.  ``pb.fileRead('sample.txt')``
+* Copy file. ``pb.fileCopy( 'sample.txt', 'sample1.txt' )``
+* Move file. ``pb.fileMove( 'sample.txt', 'sample2.txt' )``
+* Delete file. ``pb.fileDelete('sample.txt')``, ``pb.fileDelete('sample1.txt')``, ``pb.fileDelete('sample2.txt')``
+* Select file for open ``pb.fileOpenDialog()``, for save ``pb.fileSaveDialog('Save File','c:\\temp\\*.txt','Text File(*.txt),*.txt')``
+* file/dir Exists ``pb.fileExists('sample.txt')``, ``pb.dirExists('c:/temp')``
+* show current folder  ``pb.dir()``, select folder ``pb.dirSelect('Select folder for testing')``
+* change directory  ``pb.dirChange('tempfolder')``, ``pb.dirChange('..')``, ``pb.dirChange(pb.property('app.path'))``
+* create/delete directory ``pb.dirCreate('tempfolder')``, ``pb.dirDelete('tempfolder')``
+
+
+### Application Property and Session Variables
+
+* App Title:  ``pb.property('app.title')``, ``pb.property('app.title', 'window title: name of your application.')``,
+* App About:  ``pb.property('app.about')``, ``pb.property('app.about', 'about: description of your application!')``,
+* App Version:  ``pb.property('app.version')``, ``pb.property('app.version', '0.32 updated on 2022/11/10')``, 
+* Watch Options:  ``pb.property('app.watch')``, ``pb.property('app.watch', '[debug][api]')``
+* App Icon:  ``pb.property('app.icon')``, ``pb.property('app.icon', 'menu!')``,
+* get Env variable:  ``pb.property('env.JAVA_HOME')``, ``pb.property('env.CLASSPATH')``,
+* Session variable:  ``pb.session('name','casualwriter')``, ``pb.session('name')``
+
+
+### Work with Powerbuilder
+
+* open w_about dialog.  ``pb.window('w_about')`` => ``pb.api('window','w_about')``
+* login by windows account  ``pb.window('w_login')`` => ``pb.api('window','w_login')``
+* open window with parameters.  ``pb.window('w_power_chrome', 'https://news.ycombinator.com/')``
+* open dialog with parameters.  ``pb.popup('https://news.ycombinator.com/')``
+* * retrieve datawindow (reproting)  `pb.datawindow( 'element-id', 'parameters', 'not-ready-yet' )`
+
+
+### Console and Message
+
+* console support. ``pb.console('hello world!')`` is same as ``console.log('hello world again!')``
+* status message, microhelp. ``pb.status('ready')``, ``pb.error('404','File not found!')``
+* alert, message dialog. ``pb.alert('good day!')``, ``pb.msgbox('hello','good day!')``
+* message dialog with options. ``pb.msgbox('','Save data?','yes,no')``, ``pb.msgbox('title..','close?','ok,cancel')``
+
+
+### Print, PDF, Misc
+
+* Print, PrintSetup:  ``window.print()``, ``pb.print()``, ``pb.printSetup()``
+* Save to PDF/HTML:  ``pb.saveas('c:/temp/output.pdf')``,  ``pb.saveas('c:/temp/output.html')``
+* Window Position: ``pb.api('position' ,'max')``, ``pb.api('position', {top:200, left:80, width:1024, height:700})``
+* Show/hide console: ``pb.api('console','show')``, ``pb.api('console','hide')``, ``pb.api('console','500px')``, ``pb.api('console')``
+* Mini Button  ``pb.api('minibutton','clear')``, ``pb.api('minibutton',{script:'about', title:'About', icon:'toolkitabout!'})``
+* Close window: ``pb.close()`` => ``pb.api('close')``, Close with return: ``pb.api('close','return result')``
+* Sleep (ms): ``pb.sleep(2500)``
+
+</article>
+
+<template id="sub-page" title="use to render html-dialog" style="display:xnone">
 <title>Dynamic HTML Dialog</title>
 <body style="padding:12px; line-height:1.25; font-size:16px; font-family:Verdana;">
   <div id=list style="">
   <h3>Hello world</h3>
-  <br><br>Return message: <input id="return" size=48 value="nice to meet you"/>  
+  <br><br>Return message: <input id="return" size=48 value="nice to meet you."/>  
   <button onclick="pb.close(pb('return').value)">Close</button>
   </div>
 </body>   
-</xmp>
+</template>
 
 <datawindow id="report1">
 </datawindow>
+
 </body>
 
 
