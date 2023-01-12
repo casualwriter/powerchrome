@@ -43,7 +43,7 @@ For example,
 * Cloud-app enabled
 * Run on Windows 7/8/10/11
   
-  
+
 ## Get Started
 
 ### Download and Run

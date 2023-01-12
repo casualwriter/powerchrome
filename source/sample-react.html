@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Add React in One Minute</title>
+</head>
+
+<body>
+
+<p>source code: https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605
+
+<h2>Add React in One Minute</h2>
+<p>This page demonstrates using React with no build tooling.</p>
+<p>React is loaded as a script tag.</p>
+
+<!-- We will put our React component inside this div. -->
+<div id="like_button_container"></div>
+
+<!-- Load React. -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+<!-- Load our React component. -->
+<script>
+const e = React.createElement;
+
+class LikeButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { liked: false };
+  }
+
+  render() {
+    if (this.state.liked) {
+      return 'You liked this.';
+    }
+
+    return e(
+      'button',
+      { onClick: () => this.setState({ liked: true }) },
+      'Like'
+    );
+  }
+}
+
+const domContainer = document.querySelector('#like_button_container');
+const root = ReactDOM.createRoot(domContainer);
+root.render(e(LikeButton));
+
+</script>
+
+  </body>
+</html>

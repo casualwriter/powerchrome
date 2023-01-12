@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body style="padding:16px">
+
+<div ng-app="">
+
+<h1>Angular v1.6.9</h1> 
+
+<p>Input something in the input box:</p>
+
+<p>Name : <input type="text" ng-model="name" placeholder="Enter name here"></p>
+
+<h1 id=message>Hello {{name}}</h1>
+
+<br><br>
+
+<button onclick="pb.close( pb('message').innerText )">Close</button>
+
+<p>
+this sample cpoied from <a href="https://www.w3schools.com/angular/">https://www.w3schools.com/angular/</a>
+</p>
+
+</div>
+
+</body>
+</html>

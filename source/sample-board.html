@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<style>
+	body   { line-height:1.5; margin:auto; padding:0; font-family:Verdana,arial }  
+	header { background:darkgrey; color:white; height:20px; padding:12px; }
+  h1     { margin-top:200px; font-size:40px; text-align:center; }
+</style>
+
+<!-------------- html layout -------------------->
+<body>
+<header>
+  <div id="heading" style="float:left;font-size:14px;font-weight:bold">Sample DisplayBoard</div>
+  <div id="info" style="float:right;font-size:8px" onclick="window.close()">click to close</div>
+</header>
+<div id="content"></div>
+</body>
+
+<!------------- SQL or data (optional) ------------>
+<template id="sql-data1" title="SQL to retrieve data from DB">
+select now() as current
+</template>
+
+<!------------- script section -------------------->
+<script>
+
+// when powerchrome page ready, connect database, and go to data retrieval
+function onPageReady() {
+  pb.dbConnect('ODBC',"connectstring='DRIVER={Microsoft Access Driver (*.mdb)};DBQ=sample.mdb'")
+  loadData()
+  setInterval( loadData, 1000 );
+}  
+
+// load data and render page
+function loadData() {
+
+  // load data (from database or web service) 
+  let rs = JSON.parse( pb.dbQuery( document.getElementById('sql-data1').innerHTML ) )
+
+  // then render page
+  document.getElementById('info').innerHTML = new Date().toISOString()
+  document.getElementById('content').innerHTML = '<h1>' + rs.data[0].current + '</h1>'
+
+}
+</script>
